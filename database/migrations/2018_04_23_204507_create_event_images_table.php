@@ -16,7 +16,7 @@ class CreateEventImagesTable extends Migration
         Schema::create('event_images', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('event_id');
-            $table->longText('filename');
+            $table->string('filename')->unique();
 
             $table->timestamps();
 
