@@ -13,6 +13,7 @@
 
 Route::get('/', 'DisplayController@showAll')->name('all');
 Route::get('/event/{id}', 'DisplayController@showById')->name('showById');
+Route::delete('/event/{id}', 'EventController@deleteEvent')->name('deleteEvent');
 
 Route::get('/create_event', 'EventController@showForm')->name('eventForm');
 Route::post('/create_event', 'EventController@createEvent')->name('createEvent');

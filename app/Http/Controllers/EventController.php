@@ -9,6 +9,7 @@ use App\Http\Requests\CreateEventRequest;
 use App\Event;
 use App\EventImage;
 use Gate;
+use Storage;
 
 class EventController extends Controller
 {
@@ -43,12 +44,35 @@ class EventController extends Controller
           }
         }
       });
-      # redirect to new event?
-      return redirect(route('all'));
+
+      # will not work as $event is local to transaction closure. how can i make this work?
+      // if (isset($event->id)) {
+      //   return redirect(route('showById', ['id' => $event->id]));
+      // }
+      // else {
+        return redirect(route('all'));
+      //}
     }
 
+    public function deleteEvent(Request $request) {
+      $event = Event::find($request->input('event_id'));
 
-    public function deleteEvent() {
+      if (Gate::allows('delete', $event)) {
+        DB::transaction(function() use ($event) {
+          $images = EventImage::where('event_id', '=', $event->id)->get();
 
+          foreach ($images as $image) {
+            Storage::delete($image->filename);
+            $image->delete();
+          }
+          $event->delete();
+        });
+
+        return redirect(route('all'));
+      }
+      else {
+        return redirect(route('showById', ['id' => $event->id]));
+      }
     }
+
 }
