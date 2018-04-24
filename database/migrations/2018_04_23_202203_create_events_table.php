@@ -19,13 +19,13 @@ class CreateEventsTable extends Migration
             $table->string('description');
             $table->string('location');
             $table->string('category');
-            $table->dateTime('date-time');
-            $table->unsignedInteger('organiser-id');
+            $table->dateTime('date_time');
+            $table->unsignedInteger('organiser_id');
             $table->unsignedInteger('likes')->default(0);
 
             $table->timestamps();
 
-            $table->foreign('organiser-id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('organiser_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
