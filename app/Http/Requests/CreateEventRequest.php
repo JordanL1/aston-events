@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Gate;
+use App\Event;
+use App\User;
 
 class CreateEventRequest extends FormRequest
 {
@@ -14,7 +16,7 @@ class CreateEventRequest extends FormRequest
      */
     public function authorize()
     {
-        return Gate::allows('createEvent');
+        return Gate::allows('create', Event::class);
     }
 
     /**
