@@ -15,8 +15,11 @@ Route::get('/', 'DisplayController@showAll')->name('all');
 Route::get('/event/{id}', 'DisplayController@showById')->name('showById');
 Route::delete('/event/{id}', 'EventController@deleteEvent')->name('deleteEvent');
 
-Route::get('/create_event', 'EventController@showForm')->name('eventForm');
+Route::get('/create_event', 'EventController@createForm')->name('eventForm');
 Route::post('/create_event', 'EventController@createEvent')->name('createEvent');
+
+Route::get('/update/event/{id}', 'EventController@updateForm')->name('updateForm');
+Route::post('/update/event/{id}', 'EventController@updateEvent')->name('updateEvent');
 
 Auth::routes();
 

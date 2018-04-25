@@ -10,6 +10,10 @@ class EventPolicy
 {
     use HandlesAuthorization;
 
+    // public function before(User $user, Event $event) {
+    //   # override other policies in the case of e.g. an admin
+    // }
+
     /**
      * Determine whether the user can view the event.
      *
@@ -42,7 +46,7 @@ class EventPolicy
      */
     public function update(User $user, Event $event)
     {
-        //
+        return $user->id === $event->organiser_id;
     }
 
     /**

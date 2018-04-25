@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CreateEventRequest;
+use App\Http\Requests\UpdateEventRequest;
 use App\Event;
 use App\EventImage;
 use Gate;
@@ -13,12 +14,23 @@ use Storage;
 
 class EventController extends Controller
 {
-    public function showForm() {
+    public function createForm() {
       if (Gate::allows('create', Event::class)) {
         return view('/create');
       }
       else {
         return redirect('login');
+      }
+    }
+
+    public function updateForm($id) {
+      $event = Event::find($id);
+
+      if (Gate::allows('update', $event)) {
+        return view('/update', ['event' => $event, 'id' => $id]);
+      }
+      else {
+        return redirect(route('showById', ['id' => $id]));
       }
     }
 
@@ -52,6 +64,20 @@ class EventController extends Controller
       // else {
         return redirect(route('all'));
       //}
+    }
+
+    public function updateEvent(UpdateEventRequest $request, $id) {
+      DB::transaction(function() use ($request, $id) {
+        $event = Event::find($id);
+
+        $event->title = $request->input('title');
+        $event->description = $request->input('description');
+        $event->location = $request->input('location');
+        $event->category = $request->input('category');
+        $event->date_time = $request->input('date_time');
+
+        $event->save();
+      });
     }
 
     public function deleteEvent(Request $request) {
