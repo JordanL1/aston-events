@@ -37,7 +37,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                      <li><a class="nav-link" href="{{ route('all') }}">All</a></li>
+                      <li><a class="nav-link" href="{{ route('show', ['category' => 'sport']) }}">Sport</a></li>
+                      <li><a class="nav-link" href="{{ route('show', ['category' => 'culture']) }}">Culture</a></li>
+                      <li><a class="nav-link" href="{{ route('show', ['category' => 'other']) }}">Other</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -47,10 +50,11 @@
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                             <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @else
-                            <li><a class="nav-link" href="{{ route('createEvent') }}"
+                            <li><a class="nav-link" href="{{ route('createEvent') }}"><i class="fa fa-plus"></i> Event</a></li>
+                            <li><a class="nav-link" href="{{ route('show', ['user' => Auth::user()->id ]) }}"><i class="fa fa-user-circle"></i> {{ Auth::user()->name }} </a></li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    <i class="fa fa-sign-out"></i>
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
