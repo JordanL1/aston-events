@@ -30,7 +30,7 @@ class EventController extends Controller
         return view('/update', ['event' => $event, 'id' => $id]);
       }
       else {
-        return redirect(route('showById', ['id' => $id]));
+        return redirect(route('show', ['event' => $id]));
       }
     }
 
@@ -62,7 +62,7 @@ class EventController extends Controller
       //   return redirect(route('showById', ['id' => $event->id]));
       // }
       // else {
-        return redirect(route('all'));
+        return redirect(route('show'));
       //}
     }
 
@@ -78,6 +78,8 @@ class EventController extends Controller
 
         $event->save();
       });
+
+      return redirect(route('show', ['event' => $id]));
     }
 
     public function deleteEvent(Request $request) {
@@ -94,10 +96,10 @@ class EventController extends Controller
           $event->delete();
         });
 
-        return redirect(route('all'));
+        return redirect(route('show'));
       }
       else {
-        return redirect(route('showById', ['id' => $event->id]));
+        return redirect(route('show', ['event' => $event->id]));
       }
     }
 

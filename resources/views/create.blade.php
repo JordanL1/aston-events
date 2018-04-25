@@ -30,7 +30,7 @@
                         <div class="form-group row">
                           <label for="description" class="col-md-4 col-form-label text-md-right">Description:</label>
                           <div class="col-md-6">
-                            <input id="description" type="textbox" name="description" />
+                            <input id="description" type="textarea" name="description" />
                           </div>
                         </div>
 
@@ -55,7 +55,7 @@
                         <div class="form-group row">
                           <label for="date_time" class="col-md-4 col-form-label text-md-right">Date and Time:</label>
                           <div class="col-md-6">
-                            <input id="date_time" type="datetime-local" name="date_time" value="{{ date('Y-m-d\TH:i'), time() }} " min="{{ date('Y-m-d\TH:i'), time() }}" required />
+                            <input id="date_time" type="datetime-local" name="date_time" value="{{ date('Y-m-d\TH:i', time()) }} " min="{{ date('Y-m-d\TH:i', time()) }}" required />
                           </div>
                         </div>
 

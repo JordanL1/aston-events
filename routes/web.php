@@ -11,7 +11,10 @@
 |
 */
 
-Route::get('/', 'DisplayController@show')->name('all');
+Route::get('/', function() {
+  return redirect(route('show'));
+  })->name('all');
+
 Route::get('/event', 'DisplayController@show')->name('show');
 Route::delete('/event/{id}', 'EventController@deleteEvent')->name('deleteEvent');
 

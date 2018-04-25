@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Event;
+use App\EventImage;
+use App\User;
 
 class DisplayController extends Controller
 {
@@ -13,21 +15,8 @@ class DisplayController extends Controller
       return view('/main', array('events' => $events));
     }
 
-    public function showById($id) {
-      $event = Event::findOrFail($id);
-
-      # add condition to check whether event found, return different view if not
-      return view ('/event', array('event' => $event));
-    }
-
-    public function showByCategory(Request $request) {
-      $category = $request->query('category');
-      $events = Event::where('category', '=', $category)->get();
-
-      return view('/main', array('events' => $events));
-    }
-
     public function show(Request $request) {
+      $params = array();
 
       if (!empty($request->query('user'))) {
         $params['organiser_id'] = $request->query('user');
@@ -52,21 +41,12 @@ class DisplayController extends Controller
         }
       }
 
-      // if (!isset($params)) {
-      //   $events = Event::all();
-      // }
-      // else {
-      //   $events = Event::where($params);
-      // }
-
       if (!isset($order)) {
-        //$events = $events->get();
-
         if (!isset($params)) {
-          $events = Event::all();
+          $events = Event::orderBy('likes', 'DESC')->get();
         }
         else {
-          $events = Event::where($params)->get();
+          $events = Event::where($params)->orderBy('likes', 'DESC')->get();
         }
       }
       else {
@@ -78,6 +58,11 @@ class DisplayController extends Controller
         }
       }
 
-      return view('/main', array('events' => $events));
+      foreach ($events as $event) {
+        $images[$event->id] = EventImage::where('event_id', '=', $event->id)->get();
+        $users[$event->id] = User::find($event->organiser_id);
+      }
+
+      return view('/main', array('events' => $events, 'images' => $images, 'users' => $users));
     }
 }

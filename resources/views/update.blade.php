@@ -30,7 +30,7 @@
                         <div class="form-group row">
                           <label for="description" class="col-md-4 col-form-label text-md-right">Description:</label>
                           <div class="col-md-6">
-                            <input id="description" type="textbox" name="description" value="{{ $event->description }}" />
+                            <input id="description" type="textarea" name="description" value="{{ $event->description }}" />
                           </div>
                         </div>
 
