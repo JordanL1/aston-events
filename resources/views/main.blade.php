@@ -90,7 +90,7 @@
           </div>
 
           <div class="col-md-2">
-            <a href="{{ $users[$event->id]->email }}"><button type="button" class="btn btn-link text-md-left">
+            <a href="mailto:{{ $users[$event->id]->email }}"><button type="button" class="btn btn-link text-md-left">
               Contact the organiser
             </button></a>
           </div>
