@@ -12,7 +12,7 @@
         <div class="card-text">
           <p class="card-text">{{ $event->description }}</p>
         </div>
-        <a href="{{ route('showById', [$event->id]) }}" class="btn">Details</a>
+        <a href="{{ route('show', [$event->id]) }}" class="btn">Details</a>
       </div>
       <button id="like-btn-{{ $event->id }}" class="btn" onclick="likeEvent({{ $event->id }})">
         <i class="fa fa-thumbs-o-up"></i>

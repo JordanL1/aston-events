@@ -27,7 +27,7 @@ class DisplayController extends Controller
       return view('/main', array('events' => $events));
     }
 
-    public function filter(Request $request) {
+    public function show(Request $request) {
 
       if (!empty($request->query('user'))) {
         $params['organiser_id'] = $request->query('user');
@@ -41,7 +41,42 @@ class DisplayController extends Controller
         $params['id'] = $request->query('event');
       }
 
-      $events = Event::where($params)->get();
+      if (!empty($request->query('order'))) {
+        $order['order'] = $request->query('order');
+
+        if (!empty($request->query('by'))) {
+          $order['by'] = $request->query('by');
+        }
+        else {
+          $order['by'] = 'DESC';
+        }
+      }
+
+      // if (!isset($params)) {
+      //   $events = Event::all();
+      // }
+      // else {
+      //   $events = Event::where($params);
+      // }
+
+      if (!isset($order)) {
+        //$events = $events->get();
+
+        if (!isset($params)) {
+          $events = Event::all();
+        }
+        else {
+          $events = Event::where($params)->get();
+        }
+      }
+      else {
+        if (!isset($params)) {
+          $events = Event::orderBy($order['order'], $order['by'])->get();
+        }
+        else {
+          $events = Event::where($params)->orderBy($order['order'], $order['by'])->get();
+        }
+      }
 
       return view('/main', array('events' => $events));
     }

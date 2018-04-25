@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', 'DisplayController@showAll')->name('all');
-Route::get('/event/{id}', 'DisplayController@showById')->name('showById');
-Route::get('/event', 'DisplayController@filter')->name('show');
+Route::get('/', 'DisplayController@show')->name('all');
+Route::get('/event', 'DisplayController@show')->name('show');
 Route::delete('/event/{id}', 'EventController@deleteEvent')->name('deleteEvent');
 
 Route::get('/create_event', 'EventController@createForm')->name('eventForm');
