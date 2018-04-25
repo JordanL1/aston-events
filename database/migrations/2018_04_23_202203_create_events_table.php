@@ -21,7 +21,7 @@ class CreateEventsTable extends Migration
             $table->string('category');
             $table->dateTime('date_time');
             $table->unsignedInteger('organiser_id');
-            $table->unsignedInteger('likes')->default(0);
+            $table->integer('likes')->default(0);
 
             $table->timestamps();
 

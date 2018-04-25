@@ -14,6 +14,10 @@
         </div>
         <a href="{{ route('showById', [$event->id]) }}" class="btn">Details</a>
       </div>
+      <button id="like-btn-{{ $event->id }}" class="btn" onclick="likeEvent({{ $event->id }})">
+        <i class="fa fa-thumbs-o-up"></i>
+        <span id="like-text-{{ $event->id }}">{{ $event->likes }}</span>
+      </button>
     </div>
   @endforeach
 </div>

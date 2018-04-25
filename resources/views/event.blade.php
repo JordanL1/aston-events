@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -11,7 +10,12 @@
     <div class="card-body">
       <div class="card-text">
         <p class="card-text">{{ $event->description }}</p>
-      </div>
+    </div>
+
+      <button id="like-btn-{{ $event->id }}" class="btn" onclick="likeEvent({{ $event->id }})">
+        <i class="fa fa-thumbs-o-up"></i>
+        <span id="like-text-{{ $event->id }}">{{ $event->likes }}</span>
+      </button>
 
       <form method="post" action="{{ route('deleteEvent', $event->id) }}" class="text-md-right">
         @csrf
@@ -20,6 +24,7 @@
         <input type="hidden" name="event_id" value="{{ $event->id }}" />
         <button type="submit" class="btn">Delete</button>
       </form>
+
     </div>
   </div>
 </div>

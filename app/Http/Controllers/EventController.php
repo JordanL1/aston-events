@@ -101,4 +101,11 @@ class EventController extends Controller
       }
     }
 
+    public function likeEvent(Event $event) {
+      $event->likes = $event->likes + 1;
+      $event->save();
+
+      return response()->json($event->likes, 200);
+    }
+
 }
