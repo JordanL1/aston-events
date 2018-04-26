@@ -28,6 +28,8 @@ class DisplayController extends Controller
      */
     public function show(Request $request) {
       $params = array();
+      $users = array();
+      $images = array();
 
       if (!empty($request->query('user'))) {
         $params['organiser_id'] = $request->query('user');
@@ -74,6 +76,7 @@ class DisplayController extends Controller
         $users[$event->id] = User::find($event->organiser_id);
       }
 
-      return view('/main', array('events' => $events, 'images' => $images, 'users' => $users));
+
+      return view('/main', ['events' => $events, 'users' => $users, 'images' => $images]);
     }
 }
