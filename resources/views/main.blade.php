@@ -11,7 +11,7 @@
       <select name="order" id="sort-by">
         <option value="likes">popular</option>
         <option value="date_time">date</option>
-        <option value="user">organiser</option>
+        <option value="organiser_id">organiser</option>
       </select>
       <label for="in-order">in </label>
       <select name="by" id="in-order">
