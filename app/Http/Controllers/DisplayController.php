@@ -15,6 +15,17 @@ class DisplayController extends Controller
       return view('/main', array('events' => $events));
     }
 
+    /**
+      * Display selected events in the main view.
+      *
+      *  - Filter events by event column parameters (e.g. category)
+      *  - Sort events by order parameters
+      *  - If no filter applied, show all
+      *  - If no order params, sort by likes in descending order
+      *
+      *  @param Request $request GET request containing optional query params
+      *  @return mixed main view with requested events
+     */
     public function show(Request $request) {
       $params = array();
 
