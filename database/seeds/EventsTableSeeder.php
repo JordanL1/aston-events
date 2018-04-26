@@ -17,11 +17,12 @@ class EventsTableSeeder extends Seeder
       for ($i = 0; $i < 30; $i++) {
           Event::create([
               'title' => $faker->unique()->sentence(),
-              'description' => $faker->optional()->paragraphs(1, true),
+              'description' => $faker->optional()->paragraphs(2, true),
               'location' => $faker->address(),
               'category' => $faker->randomElement(['sport', 'culture', 'other']),
               'date_time' => $faker->dateTime(),
-              'organiser_id' => $faker->numberBetween(1, 10)
+              'organiser_id' => $faker->numberBetween(1, 10),
+              'likes' => $faker->numberBetween(0, 100)
           ]);
       }
     }
